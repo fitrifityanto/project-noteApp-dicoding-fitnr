@@ -1,3 +1,4 @@
+import { getAccessToken } from "../utils/auth";
 import CONFIG from "../config";
 
 const ENDPOINTS = {
@@ -5,6 +6,9 @@ const ENDPOINTS = {
 
   // Auth
   LOGIN: `${CONFIG.BASE_URL}/login`,
+
+  // Story
+  STORY_LIST: `${CONFIG.BASE_URL}/stories`,
 };
 
 export async function getData() {
@@ -19,6 +23,20 @@ export async function getLogin({ email, password }) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: data,
+  });
+  const json = await fetchResponse.json();
+
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
+}
+
+export async function getAllStories() {
+  const accessToken = getAccessToken();
+
+  const fetchResponse = await fetch(ENDPOINTS.STORY_LIST, {
+    headers: { Authorization: `Bearer ${accessToken}` },
   });
   const json = await fetchResponse.json();
 

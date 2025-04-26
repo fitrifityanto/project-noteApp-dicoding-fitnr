@@ -115,6 +115,82 @@ header {
 
 /* Write your styles more here */
 
+/* HOME PAGE */
+.stories-list__container {
+  min-height: 400px;
+}
+
+.stories-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.stories-list__empty,
+.stories-list__error {
+  text-align: center;
+}
+
+.story-item {
+  border: 1px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.story-item__image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.story-item__body {
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+.story-item__main {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+.story-item__more-info {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.story-item__createdat,
+.story-item__location {
+  font-size: 0.875rem;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.story-item__description {
+  color: #333;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.story-item__read-more {
+  display: inline-flex;
+  background-color: #333;
+  color: #fff;
+  font-size: 0.875rem;
+}
+
 @media screen and (width > 1000px) {
   .navigation-drawer {
     min-height: auto;

@@ -1,3 +1,11 @@
+import {
+  generateLoaderAbsoluteTemplate,
+  generateStoryItemTemplate,
+  generateStoriesListEmptyTemplate,
+} from "../../templates";
+import HomePresenter from "./home-presenter";
+import * as StoryAPI from "../../data/api";
+
 export default class HomePage {
   #presenter = null;
 
@@ -19,5 +27,37 @@ export default class HomePage {
       view: this,
       model: StoryAPI,
     });
+
+    await this.#presenter.initialStory();
+  }
+
+  showStoryList(message, stories) {
+    console.log(stories.length);
+    if (stories.length <= 0) {
+      console.log("stories empty");
+      this.storiesListEmpty();
+      return;
+    }
+
+    const html = stories.reduce((accumulator, story) => {
+      return accumulator.concat(generateStoryItemTemplate(story));
+    }, "");
+
+    document.getElementById("stories-list").innerHTML = `
+    <div class="stories-list">${html}</div>`;
+  }
+
+  storiesListEmpty() {
+    document.getElementById("stories-list").innerHTML =
+      generateStoriesListEmptyTemplate();
+  }
+
+  showLoading() {
+    document.getElementById("stories-list-loading-container").innerHTML =
+      generateLoaderAbsoluteTemplate();
+  }
+
+  hideLoading() {
+    document.getElementById("stories-list-loading-container").innerHTML = "";
   }
 }

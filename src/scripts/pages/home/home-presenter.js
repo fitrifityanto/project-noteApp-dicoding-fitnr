@@ -1,3 +1,5 @@
+import { mapStory } from "../../data/api-mapper";
+
 export default class HomePresenter {
   #view;
   #model;
@@ -17,7 +19,10 @@ export default class HomePresenter {
         return;
       }
       // console.log(response);
-      this.#view.showStoryList(response.message, response.listStory);
+      const mappedStories = await Promise.all(response.listStory.map(mapStory));
+
+      console.log(mappedStories);
+      this.#view.showStoryList(response.message, mappedStories);
     } catch (error) {
       console.error("initialStory: error:", error);
     } finally {

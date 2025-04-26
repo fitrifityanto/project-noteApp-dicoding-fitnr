@@ -29,6 +29,7 @@ export function generateStoryItemTemplate({
   description,
   photoUrl,
   createdAt,
+  placeName,
 }) {
   return `
 
@@ -47,7 +48,7 @@ export function generateStoryItemTemplate({
                 ${showFormattedDate(createdAt, "id-ID")}
               </div>
               <div class="story-item__location">
-                <i class="fas fa-map"></i> koordinat
+                <i class="fas fa-map"></i> ${placeName}
               </div>
             </div>
           </div>

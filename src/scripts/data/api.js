@@ -9,6 +9,7 @@ const ENDPOINTS = {
 
   // Story
   STORY_LIST: `${CONFIG.BASE_URL}/stories`,
+  STORY_DETAIL: (id) => `${CONFIG.BASE_URL}/stories/${id}`,
 };
 
 export async function getData() {
@@ -46,3 +47,16 @@ export async function getAllStories() {
   };
 }
 
+export async function getStoryById(id) {
+  const accessToken = getAccessToken();
+
+  const fetchResponse = await fetch(ENDPOINTS.STORY_DETAIL(id), {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  const json = await fetchResponse.json();
+
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
+}

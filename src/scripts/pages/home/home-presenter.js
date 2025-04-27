@@ -21,7 +21,7 @@ export default class HomePresenter {
       // console.log(response);
       const mappedStories = await Promise.all(response.listStory.map(mapStory));
 
-      console.log(mappedStories);
+      console.log("stories with placename", mappedStories);
       this.#view.showStoryList(response.message, mappedStories);
     } catch (error) {
       console.error("initialStory: error:", error);

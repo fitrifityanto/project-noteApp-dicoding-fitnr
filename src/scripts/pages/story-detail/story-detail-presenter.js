@@ -30,4 +30,15 @@ export default class StoryDetailPresenter {
       this.#view.storyDetailError(error.message);
     }
   }
+
+  async showStoryDetailMap() {
+    this.#view.showMapLoading();
+    try {
+      await this.#view.initialMap();
+    } catch (error) {
+      console.error("showStoryDetailMap: error", error);
+    } finally {
+      this.#view.hideMapLoading();
+    }
+  }
 }

@@ -191,6 +191,12 @@ header {
   font-size: 0.875rem;
 }
 
+.story-detail__map__container,
+.story-detail__map {
+  height: 500px;
+  position: relative;
+}
+
 @media screen and (width > 1000px) {
   .navigation-drawer {
     min-height: auto;

@@ -8,6 +8,13 @@ export function generateUnauthenticatedNavigationListTemplate() {
   `;
 }
 
+export function generateAuthenticatedNavigationListTemplate() {
+  return `
+  <li><a id="new-story-button" class="btn new-story-button" href="#/new">Buat Cerita <i class="fas fa-plus"></i></a></li>
+  <li><a id="logout-button" class="logout-button" href="#/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+  `;
+}
+
 export function generateLoaderAbsoluteTemplate() {
   return `
     <div class="loader loader-absolute"></div>
@@ -102,16 +109,15 @@ export function generateStoryDetailTemplate({
             <i class="fas fa-map"></i> ${placeName}
           </div>
         </div>
-        
       </div>
       <div id="images" class="story-detail__images__container">
         <img class="story-item__image" src="${photoUrl}" alt="" />
       </div>
-    </div> 
+    </div>
     <div class="container">
       <div class="story-detail__body">
         <div class="story-detail__body__description__container">
-        <h2 class="story-detail__description__title">Deskripsi</h2>
+          <h2 class="story-detail__description__title">Deskripsi</h2>
           <div id="description" class="story-detail__description__body">
             ${description}
           </div>
@@ -123,36 +129,23 @@ export function generateStoryDetailTemplate({
             <div id="map-loading-container"></div>
           </div>
           <div class="story-detail__more-info__inline">
-          <div
-            id="location-latitude"
-            class="story-detail__location__latitude"
-            data-value="${lat}"
-          >
-            Latitude: ${lat}
-          </div>
-          <div
-            id="location-longitude"
-            class="story-detail__location__longitude"
-            data-value="${lon}"
-          >Longitude: ${lon}
-                      </div>
-        </div>
-        </div>
-
-        <hr />
-
-        <div class="story-detail__body__actions__container">
-          <h2>Aksi</h2>
-          <div class="story-detail__actions__buttons">
-            <div id="save-actions-container"></div>
-            <div id="notify-me-actions-container">
-              <button id="story-detail-notify-me" class="btn btn-transparent">
-                Try Notify Me <i class="far fa-bell"></i>
-              </button>
+            <div
+              id="location-latitude"
+              class="story-detail__location__latitude"
+              data-value="${lat}"
+            >
+              Latitude: ${lat}
+            </div>
+            <div
+              id="location-longitude"
+              class="story-detail__location__longitude"
+              data-value="${lon}"
+            >
+              Longitude: ${lon}
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> 
   `;
 }

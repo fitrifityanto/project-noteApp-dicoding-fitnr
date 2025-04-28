@@ -1,6 +1,9 @@
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
-import { generateUnauthenticatedNavigationListTemplate } from "../templates";
+import {
+  generateUnauthenticatedNavigationListTemplate,
+  generateAuthenticatedNavigationListTemplate,
+} from "../templates";
 import { getAccessToken } from "../utils/auth";
 import { transitionHelper } from "../utils";
 
@@ -53,6 +56,8 @@ class App {
       navList.innerHTML = generateUnauthenticatedNavigationListTemplate();
       return;
     }
+
+    navList.innerHTML = generateAuthenticatedNavigationListTemplate();
   }
 
   async renderPage() {

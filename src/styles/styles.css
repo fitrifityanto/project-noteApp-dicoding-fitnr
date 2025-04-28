@@ -197,6 +197,13 @@ header {
   position: relative;
 }
 
+/* New Locations */
+.new-form__location__map__container,
+.new-form__location__map {
+  height: 400px;
+  position: relative;
+}
+
 @media screen and (width > 1000px) {
   .navigation-drawer {
     min-height: auto;

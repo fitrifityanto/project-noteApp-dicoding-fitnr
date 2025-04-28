@@ -204,6 +204,10 @@ header {
   position: relative;
 }
 
+.new-form__camera__canvas {
+  display: none;
+}
+
 @media screen and (width > 1000px) {
   .navigation-drawer {
     min-height: auto;

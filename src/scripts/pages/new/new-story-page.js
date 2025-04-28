@@ -1,7 +1,9 @@
 import NewStoryPresenter from "./new-story-presenter";
+import { convertBase64ToBlob } from "../../utils";
 import { generateLoaderAbsoluteTemplate } from "../../templates";
 import * as storyAPI from "../../data/api";
 import Map from "../../utils/map";
+import Camera from "../../utils/camera";
 
 export default class NewStoryPage {
   #presenter;
@@ -147,10 +149,11 @@ export default class NewStoryPage {
       event.preventDefault();
 
       const data = {
-        name: this.#form.elements.namedItem("name").value,
         description: this.#form.elements.namedItem("description").value,
         lat: this.#form.elements.namedItem("latitude").value,
         lon: this.#form.elements.namedItem("longitude").value,
+
+        takenPhotos: this.#takenPhotos.map((picture) => picture.blob),
       };
       await this.#presenter.postNewStory(data);
     });
@@ -166,6 +169,31 @@ export default class NewStoryPage {
         await Promise.all(insertingPicturesPromises);
 
         await this.#takenPictures();
+      });
+
+    document
+      .getElementById("photos-input-button")
+      .addEventListener("click", () => {
+        this.#form.elements.namedItem("photos-input").click();
+      });
+
+    const cameraContainer = document.getElementById("camera-container");
+    document
+      .getElementById("open-photos-camera-button")
+      .addEventListener("click", async (event) => {
+        cameraContainer.classList.toggle("open");
+        this.#isCameraOpen = cameraContainer.classList.contains("open");
+
+        if (this.#isCameraOpen) {
+          event.currentTarget.textContent = "Tutup kamera";
+          this.#setupCamera();
+          await this.#camera.launch();
+
+          return;
+        }
+
+        event.currentTarget.textContent = "Buka kamera";
+        this.#camera.stop();
       });
   }
 
@@ -206,7 +234,7 @@ export default class NewStoryPage {
   async #addTakenPicture(image) {
     let blob = image;
     if (image instanceof String) {
-      blob = await convertBase64ToBlob(image, "image/jpeg");
+      blob = await convertBase64ToBlob(image, "image/png");
     }
 
     const newPhoto = {
@@ -214,18 +242,17 @@ export default class NewStoryPage {
       blob: blob,
     };
     this.#takenPhotos = [...this.#takenPhotos, newPhoto];
-    return newPhoto;
   }
 
   async #takenPictures() {
     const html = this.#takenPhotos.reduce(
       (accumulator, picture, currentIndex) => {
         const imageUrl = URL.createObjectURL(picture.blob);
-
+        console.log(imageUrl);
         return accumulator.concat(`
         <li class="new-form__photos__outputs-item">
           <button type="button" data-deletepictureid="${picture.id}" class="new-form__photos__outputs-item__delete-btn">
-            <img src="${imageUrl}" alt="Dokumentasi ke-${currentIndex + 1}">
+            <img src="${imageUrl}" alt="foto ke-${currentIndex + 1}">
           </button>
         </li>
 `);
@@ -239,17 +266,34 @@ export default class NewStoryPage {
       .querySelectorAll("button[data-deletepictureid]")
       .forEach((button) =>
         button.addEventListener("click", (event) => {
-          const pictureId = event.target.dataset.deletepictureid;
-
+          const pictureId = event.currentTarget.dataset.deletepictureid;
+          // console.log("pictureId", pictureId);
           const deleted = this.#removePicture(pictureId);
           if (!deleted) {
-            console.log("picture with id ${pictureId} not found");
+            console.log(`picture with id ${pictureId} not found`);
           }
 
           //updating taken pictures
           this.#takenPictures();
         }),
       );
+    console.log("imageUrl", this.#takenPhotos);
+  }
+
+  #setupCamera() {
+    if (!this.#camera) {
+      this.#camera = new Camera({
+        video: document.getElementById("camera-video"),
+        cameraSelect: document.getElementById("camera-select"),
+        canvas: document.getElementById("camera-canvas"),
+      });
+    }
+
+    this.#camera.addCheeseButtonListener("#camera-take-button", async () => {
+      const image = await this.#camera.takePicture();
+      await this.#addTakenPicture(image);
+      await this.#takenPictures();
+    });
   }
 
   #removePicture(id) {
@@ -268,6 +312,21 @@ export default class NewStoryPage {
     return selectedPicture;
   }
 
+  storeSuccessfully(message) {
+    console.log(message);
+    this.clearForm();
+
+    location.hash = "/";
+  }
+
+  storeFailed(message) {
+    console.log(message);
+  }
+
+  clearForm() {
+    this.#form.reset();
+  }
+
   showMapLoading() {
     document.getElementById("map-loading-container").innerHTML =
       generateLoaderAbsoluteTemplate();
@@ -275,5 +334,19 @@ export default class NewStoryPage {
 
   hideMapLoading() {
     document.getElementById("map-loading-container").innerHTML = "";
+  }
+
+  showSubmitLoadingButton() {
+    document.getElementById("submit-button-container").innerHTML = `
+  <button class="btn" type="submit" disabled>
+    <i class="fas fa-spinner loader-button"></i> Buat Cerita
+  </button>
+`;
+  }
+
+  hideSubmitLoadingButton() {
+    document.getElementById("submit-button-container").innerHTML = `
+  <button class="btn" type="submit">Buat Cerita</button>
+    `;
   }
 }

@@ -10,6 +10,7 @@ const ENDPOINTS = {
   // Story
   STORY_LIST: `${CONFIG.BASE_URL}/stories`,
   STORY_DETAIL: (id) => `${CONFIG.BASE_URL}/stories/${id}`,
+  STORE_NEW_STORY: `${CONFIG.BASE_URL}/stories`,
 };
 
 export async function getData() {
@@ -52,6 +53,32 @@ export async function getStoryById(id) {
 
   const fetchResponse = await fetch(ENDPOINTS.STORY_DETAIL(id), {
     headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  const json = await fetchResponse.json();
+
+  return {
+    ...json,
+    ok: fetchResponse.ok,
+  };
+}
+
+export async function storeNewStory({ description, takenPhotos, lat, lon }) {
+  const accessToken = getAccessToken();
+
+  const formData = new FormData();
+  formData.set("description", description);
+  formData.set("lat", lat);
+  formData.set("lon", lon);
+  takenPhotos.forEach((photo) => {
+    formData.append("photo", photo);
+  });
+  const firstPhotoBlob = takenPhotos[0];
+  console.log("firstPhotoBlob", firstPhotoBlob);
+
+  const fetchResponse = await fetch(ENDPOINTS.STORE_NEW_STORY, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: formData,
   });
   const json = await fetchResponse.json();
 

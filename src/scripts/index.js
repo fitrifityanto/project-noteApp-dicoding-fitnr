@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.addEventListener("hashchange", async () => {
     await app.renderPage();
 
-    Camera.stopAllStreams();
     //Stop all active media
+    Camera.stopAllStreams();
   });
 });

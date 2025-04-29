@@ -69,12 +69,14 @@ export async function storeNewStory({ description, takenPhotos, lat, lon }) {
   formData.set("description", description);
   formData.set("lat", lat);
   formData.set("lon", lon);
-  takenPhotos.forEach((photo) => {
-    formData.append("photo", photo);
-  });
-  const firstPhotoBlob = takenPhotos[0];
-  console.log("firstPhotoBlob", firstPhotoBlob);
+  // takenPhotos.forEach((photo) => {
+  //   formData.append("photo", photo);
+  // });
 
+  //kirim hanya satu file
+  if (takenPhotos.length > 0) {
+    formData.set("photo", takenPhotos[0]);
+  }
   const fetchResponse = await fetch(ENDPOINTS.STORE_NEW_STORY, {
     method: "POST",
     headers: { Authorization: `Bearer ${accessToken}` },

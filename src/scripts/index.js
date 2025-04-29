@@ -1,5 +1,6 @@
 // CSS imports
 import "../styles/styles.css";
+import "../styles/responsives.css";
 import "leaflet/dist/leaflet.css";
 
 import App from "./pages/app";
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     content: document.querySelector("#main-content"),
     drawerButton: document.querySelector("#drawer-button"),
     navigationDrawer: document.querySelector("#navigation-drawer"),
+    skipToContentButton: document.querySelector("#skip-to-content"),
   });
   await app.renderPage();
 

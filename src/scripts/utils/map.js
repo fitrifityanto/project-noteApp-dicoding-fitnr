@@ -25,7 +25,6 @@ export default class Map {
       }
 
       const data = await response.json();
-      console.log("data getPlaceNameByCoordinate", data);
       const rawPlaceName = data.features?.[0]?.place_name ?? `${lat}, ${lng}`;
 
       // hapus string undefined jika ditemukan pada rawPlaceName

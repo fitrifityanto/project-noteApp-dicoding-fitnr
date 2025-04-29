@@ -5,8 +5,57 @@
   box-sizing: border-box;
 }
 
+:root {
+  --primary-color: #555;
+  --primary-text-color: #ffffff;
+  --primary-hover-color: #333;
+  --primary-shadow-color: #000;
+
+  --secondary-color: #dfdfdf;
+  --secondary-text-color: #ffffff;
+
+  --background-color: #skyblue;
+}
+
+@keyframes full-slide-from-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes full-slide-to-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+::view-transition-old(root) {
+  animation-name: full-slide-to-left;
+  animation-duration: 900ms;
+  animation-timing-function: ease-out;
+}
+::view-transition-new(root) {
+  animation-name: full-slide-from-right;
+  animation-duration: 900ms;
+  animation-timing-function: ease-out;
+}
+
 body {
   font-family: "Arial", sans-serif;
+}
+
+.skip-to-content {
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
+  padding: 10px 20px;
+  background-color: #fff;
+  transform: translateY(-150%);
+}
+
+.skip-to-content:focus,
+.skip-to-content:focus-within {
+  transform: translateY(0);
 }
 
 .container {
@@ -16,7 +65,9 @@ body {
 }
 
 header {
-  background-color: lightskyblue;
+  background-color: var(--background-color);
+
+  view-transition-name: header;
 }
 
 .main-header {
@@ -138,6 +189,7 @@ header {
 }
 
 .story-item__image {
+  /* .story-detail__image { */
   display: block;
   width: 100%;
   height: 200px;
@@ -197,6 +249,16 @@ header {
   position: relative;
 }
 
+.story-detail__image {
+  display: block;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+
+  view-transition-name: cerita-image;
+}
+
 /* New Locations */
 .new-form__location__map__container,
 .new-form__location__map {
@@ -206,33 +268,4 @@ header {
 
 .new-form__camera__canvas {
   display: none;
-}
-
-@media screen and (width > 1000px) {
-  .navigation-drawer {
-    min-height: auto;
-    width: auto;
-    padding: 0;
-    background-color: transparent;
-
-    flex-direction: row;
-    justify-content: space-between;
-
-    position: static;
-    box-shadow: none;
-    transform: translateX(0);
-  }
-
-  .nav-list,
-  .navigation-drawer__navlist {
-    flex-direction: row;
-  }
-
-  .nav-list li a {
-    display: inline-block;
-  }
-
-  .drawer-button {
-    display: none;
-  }
 }

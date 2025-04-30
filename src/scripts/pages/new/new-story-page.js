@@ -122,9 +122,9 @@ export default class NewStoryPage {
           </div>
           <div class="form-buttons">
             <span id="submit-button-container">
-              <button class="btn" type="submit">Buat cerita</button>
+              <button class="button" type="submit">Buat cerita</button>
             </span>
-            <a class="btn btn-outline" href="#/">Batal</a>
+            <a class="button" href="#/">Batal</a>
           </div>
         </form>
       </div>

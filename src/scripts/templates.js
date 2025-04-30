@@ -113,7 +113,7 @@ export function generateStoryDetailTemplate({
         </div>
       </div>
       <div id="images" class="story-detail__images__container">
-        <img class="story-detail__image" src="${photoUrl}" alt="photo-${createdAt}" />
+        <img class="story-detail__image" src="${photoUrl}" alt="StoryPhoto-${createdAt}" />
       </div>
     </div>
     <div class="story-detail__body__container">

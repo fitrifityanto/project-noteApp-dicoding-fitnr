@@ -14,7 +14,7 @@ export default class StoryDetailPage {
 
   async render() {
     return `
-      <section>
+      <section class="container">
         <div class="story-detail__container">
           <div id="story-detail" class="story-detail"></div>
           <div id="story-detail-loading-container"></div>

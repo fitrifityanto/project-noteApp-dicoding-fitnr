@@ -97,25 +97,26 @@ export function generateStoryDetailTemplate({
 
       <div class="story-detail__more-info">
         <div class="story-detail__more-info__inline">
-          <div
-            id="createdat"
-            class="story-detail__createdat"
-            data-value="${createdAtFormatted}"
-          ></div>
-          <div
+                <div
             id="location-place-name"
             class="story-detail__location__place-name"
             data-value="${placeName}"
           >
             <i class="fas fa-map"></i> ${placeName}
           </div>
+     <div
+            id="createdat"
+            class="story-detail__createdat"
+            data-value="${createdAtFormatted}"
+          > ${createdAtFormatted}
+</div>
         </div>
       </div>
       <div id="images" class="story-detail__images__container">
         <img class="story-detail__image" src="${photoUrl}" alt="photo-${createdAt}" />
       </div>
     </div>
-    <div class="container">
+    <div class="story-detail__body__container">
       <div class="story-detail__body">
         <div class="story-detail__body__description__container">
           <h2 class="story-detail__description__title">Deskripsi</h2>

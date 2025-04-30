@@ -59,9 +59,10 @@ body {
 }
 
 .container {
-  padding-inline: 32px;
-  margin-inline: auto;
-  max-width: 1300px;
+  padding-inline: 2rem;
+  padding-block: 2rem;
+  /* margin-inline: auto; */
+  /* max-width: 1300px; */
 }
 
 header {
@@ -162,9 +163,10 @@ header {
 
 /* MAIN */
 .main-content {
-  max-width: 640px;
+  max-width: 920px;
   width: 100%;
   margin-inline: auto;
+
   padding-inline: 1rem;
   padding-block: 1rem;
 }
@@ -173,6 +175,8 @@ header {
 
 /* HOME PAGE */
 .stories-list__container {
+  max-width: 640px;
+  margin-inline: auto;
   min-height: 600px;
 }
 
@@ -252,17 +256,39 @@ header {
   font-size: 0.875rem;
   text-decoration: none;
 }
+/* DETAIL PAGE */
+
+.story-detail {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.story-detail__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.story-detail__body {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
 
 .story-detail__map__container,
 .story-detail__map {
-  height: 500px;
+  /* height: 500px; */
+  width: 100%;
+  aspect-ratio: 16/9;
   position: relative;
 }
 
 .story-detail__image {
   display: block;
   width: 100%;
-  height: 400px;
+  aspect-ratio: 16/9;
+  /* height: 400px; */
   object-fit: cover;
   object-position: center;
 

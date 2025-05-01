@@ -7,6 +7,16 @@ export function showFormattedDate(date, locale = "en-US", options = {}) {
   });
 }
 
+export function showImageAlt(description) {
+  const maxLength = 50;
+  const trimedDescription =
+    description.length > maxLength
+      ? description.substring(0, maxLength)
+      : description;
+
+  return trimedDescription;
+}
+
 export function sleep(time = 1000) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }

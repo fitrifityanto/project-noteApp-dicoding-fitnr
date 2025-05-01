@@ -1,4 +1,4 @@
-import { showFormattedDate } from "./utils";
+import { showFormattedDate, showImageAlt } from "./utils";
 
 export function generateUnauthenticatedNavigationListTemplate() {
   return `
@@ -50,7 +50,7 @@ export function generateStoryItemTemplate({
           </div>
         </div>
       </div>
-      <img class="story-item__image" src="${photoUrl}" alt="" />
+      <img class="story-item__image" src="${photoUrl}" alt="${showImageAlt(description)}" />
       <div class="story-item__body">
         <div id="story-description" class="story-item__description">
           ${description}

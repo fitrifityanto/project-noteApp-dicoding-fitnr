@@ -9,7 +9,7 @@ import {
   generateUnauthenticatedNavigationListTemplate,
   generateAuthenticatedNavigationListTemplate,
 } from "../templates";
-import { getAccessToken } from "../utils/auth";
+import { getAccessToken, getLogout } from "../utils/auth";
 import { setupSkipToContent, transitionHelper } from "../utils";
 
 class App {
@@ -77,15 +77,28 @@ class App {
     }
 
     navList.innerHTML = generateAuthenticatedNavigationListTemplate();
+
+    const logoutButton = document.getElementById("logout-button");
+    logoutButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (confirm("Yakin ingin logout?")) {
+        getLogout();
+        location.hash = "login";
+      }
+    });
   }
 
   async renderPage() {
     const url = getActiveRoute();
-    const route = routes[url];
-    // this.#setupNavigationList();
+    const routeFn = routes[url];
 
-    // get page instance
-    const page = route();
+    if (!routeFn) {
+      console.error("Route tidak ditemukan untuk:", url);
+      this.#content.innerHTML = "<p>Halaman tidak ditemukan</p>";
+      return;
+    }
+
+    const page = routeFn();
 
     if (!document.startViewTransition) {
       this.#content.innerHTML = await page.render();
@@ -101,7 +114,6 @@ class App {
       targetThumbnail = document.querySelector(
         `.story-item[data-storyid="${parsedPathname.id}"] .story-item__image`,
       );
-      console.log("targetThumbnail", targetThumbnail);
       if (targetThumbnail) {
         targetThumbnail.style.viewTransitionName = "cerita-image";
       }
@@ -110,7 +122,7 @@ class App {
 
     const transition = transitionHelper({
       params: {
-        navigationType: this.#getNavigationType(),
+        navigationType,
         currentPath: this.#currentPath,
       },
       updateDOM: async ({ navigationType, currentPath }) => {
@@ -130,36 +142,16 @@ class App {
       },
     });
 
-    // const transition = transitionHelper({
-    //   updateDOM: async () => {
-    //     this.#content.innerHTML = await page.render();
-    //     await page.afterRender();
-    //
-    //
-    //   },
-    // });
-    //     const transition = document.startViewTransition(async () => {
-    //   this.#content.innerHTML = await page.render();
-    //   await page.afterRender();
-    // });
-
-    //     transition.updateCallbackDone.then(() => {
-    //   scrollTo({ top: 0, behavior: 'instant' });
-    //   this.#setupNavigationList();
-    // });
-
     transition.ready.catch(console.error);
+
     transition.updateCallbackDone.then(() => {
       scrollTo({ top: 0, behavior: "instant" });
       this.#setupNavigationList();
     });
 
     transition.finished.then(() => {
-      // this.#setupNavigationList();
       console.log("transition finished");
-
       this.#currentPath = getActivePathname();
-
       if (targetThumbnail) {
         targetThumbnail.style.viewTransitionName = "";
       }

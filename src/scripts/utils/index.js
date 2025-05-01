@@ -25,24 +25,25 @@ export function setupSkipToContent(element, mainContent) {
   element.addEventListener("click", () => mainContent.focus());
 }
 
-export function transitionHelper({
-  skipTransition = false,
-  updateDOM,
-  params,
-}) {
-  if (skipTransition || !document.startViewTransition) {
-    const updateCallbackDone = Promise.resolve(updateDOM(params)).then(
-      () => undefined,
-    );
-
+export function transitionHelper({ updateDOM, params = {} }) {
+  if (!document.startViewTransition) {
+    const promise = updateDOM(params);
     return {
-      ready: Promise.reject(Error("View transitions unsupported")),
-      updateCallbackDone,
-      finished: updateCallbackDone,
+      ready: Promise.resolve(),
+      updateCallbackDone: promise.then(() => undefined),
+      finished: promise,
     };
   }
 
-  return document.startViewTransition(() => updateDOM(params));
+  const transition = document.startViewTransition(() => {
+    return updateDOM(params);
+  });
+
+  return {
+    ready: transition.ready,
+    updateCallbackDone: transition.updateCallbackDone,
+    finished: transition.finished,
+  };
 }
 
 // export function transitionHelper({ skipTransition = false, updateDOM }) {

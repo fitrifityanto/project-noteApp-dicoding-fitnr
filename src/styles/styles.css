@@ -44,6 +44,12 @@ body {
   font-family: "Arial", sans-serif;
 }
 
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
 input,
 textarea,
 select {
@@ -54,13 +60,20 @@ select {
   font-size: 1rem;
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  outline: 1px solid var(--primary-color);
+}
+
 textarea {
   min-height: 100px;
   resize: none;
 }
 
 form > .form-control:not([hidden]) ~ .form-control:not([hidden]) {
-  margin-block-start: 30px;
+  margin-block-start: 10px;
 }
 
 form .form-control > :not([hidden]) ~ :not([hidden]) {
@@ -341,6 +354,39 @@ header {
   margin-block-start: 10px;
 }
 
+.login-container,
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  /* background-color: #f5f5f5; */
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-form__do-not-have-account {
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.login-form__do-not-have-account a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-form__do-not-have-account a:hover {
+  text-decoration: underline;
+}
+
 .btn {
   background-color: var(--primary-color);
   border-radius: 4px;
@@ -436,6 +482,7 @@ header {
 .form-buttons {
   display: flex;
   gap: 10px;
+  margin-block-start: 20px;
 }
 
 .form-buttons > * {

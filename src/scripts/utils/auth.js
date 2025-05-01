@@ -29,6 +29,16 @@ export function putAccessToken(token) {
   }
 }
 
+export function removeAccessToken() {
+  try {
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    return true;
+  } catch (error) {
+    console.error("getLogout: error:", error);
+    return false;
+  }
+}
+
 const unauthenticatedRoutesOnly = ["/login", "/register"];
 
 export function checkUnauthenticatedRouteOnly(page) {
@@ -52,4 +62,8 @@ export function checkAuthenticatedRoute(page) {
   }
 
   return page;
+}
+
+export function getLogout() {
+  removeAccessToken();
 }

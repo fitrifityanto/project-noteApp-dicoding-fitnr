@@ -90,7 +90,7 @@ export function generateStoryDetailTemplate({
   placeName,
 }) {
   const createdAtFormatted = showFormattedDate(createdAt, "id-ID");
-  console.log(name, description, photoUrl, createdAt, lat, lon, placeName);
+  // console.log(name, description, photoUrl, createdAt, lat, lon, placeName);
   return `
     <div class="story-detail__header">
       <h2 id="name" class="story-name">${name}</h2>

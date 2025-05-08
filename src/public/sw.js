@@ -1,0 +1,1 @@
+self.addEventListener("push",i=>{console.log("Service worker pushing...");async function t(){const o=await i.data.json();await self.registration.showNotification(o.title,{body:o.options.body})}i.waitUntil(t())});

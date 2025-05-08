@@ -394,7 +394,7 @@ header {
   border: 1px solid var(--primary-color);
 
   display: inline-block;
-  align-item: center;
+  align-items: center;
   justify-content: center;
   gap: 8px;
 

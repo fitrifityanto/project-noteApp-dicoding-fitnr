@@ -98,7 +98,6 @@ export function generateStoryDetailTemplate({
   placeName,
 }) {
   const createdAtFormatted = showFormattedDate(createdAt, "id-ID");
-  // console.log(name, description, photoUrl, createdAt, lat, lon, placeName);
   return `
     <div class="story-detail__header">
       <h2 id="name" class="story-name">${name}</h2>
@@ -156,7 +155,28 @@ export function generateStoryDetailTemplate({
           </div>
         </div> 
       </div>
+      <div class="report-detail__body__actions__container">
+        <div class="story-detail__actions__buttons">
+            <div id="save-actions-container"></div>
+        </div>
+      </div>
     </div> 
+  `;
+}
+
+export function generateSaveStoryButtonTemplate() {
+  return `
+    <button id="story-detail-save" class="btn btn-transparent">
+      Simpan Cerita <i class="far fa-bookmark"></i>
+    </button>  
+  `;
+}
+
+export function generateRemoveStoryButtonTemplate() {
+  return `
+    <button id="story-detail-remove" class="btn btn-transparent">
+      Buang Cerita <i class="fas fa-bookmark"></i>
+    </button>
   `;
 }
 

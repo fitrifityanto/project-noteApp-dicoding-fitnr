@@ -2,11 +2,14 @@ import {
   generateLoaderAbsoluteTemplate,
   generateStoryDetailErrorTemplate,
   generateStoryDetailTemplate,
+  generateSaveStoryButtonTemplate,
+  generateRemoveStoryButtonTemplate,
 } from "../../templates";
 import StoryDetailPresenter from "./story-detail-presenter";
 import { parseActivePathname } from "../../routes/url-parser";
 import * as storyAPI from "../../data/api";
 import Map from "../../utils/map";
+import Database from "../../data/database";
 
 export default class StoryDetailPage {
   #presenter = null;
@@ -27,6 +30,7 @@ export default class StoryDetailPage {
     this.#presenter = new StoryDetailPresenter(parseActivePathname().id, {
       view: this,
       model: storyAPI,
+      dbmodel: Database,
     });
 
     this.#presenter.showStoryDetail();
@@ -55,6 +59,51 @@ export default class StoryDetailPage {
       this.#map.changeCamera(storyCoordinate);
       this.#map.addMarker(storyCoordinate, markerOptions, popupOptions);
     }
+
+    // actions button
+    this.#presenter.showSaveButton();
+  }
+
+  renderSaveButton() {
+    document.getElementById("save-actions-container").innerHTML =
+      generateSaveStoryButtonTemplate();
+
+    document
+      .getElementById("story-detail-save")
+      .addEventListener("click", async () => {
+        await this.#presenter.saveStory();
+        await this.#presenter.showSaveButton();
+        // alert("Fitur simpan cerita akan segera hadir!");
+      });
+  }
+
+  saveToBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  saveToBookmarkFailed(message) {
+    console.log(message);
+  }
+
+  renderRemoveButton() {
+    document.getElementById("save-actions-container").innerHTML =
+      generateRemoveStoryButtonTemplate();
+
+    document
+      .getElementById("story-detail-remove")
+      .addEventListener("click", async () => {
+        await this.#presenter.removeStory();
+        await this.#presenter.showSaveButton();
+        // alert("fitur simpan cerita akan segera hadir");
+      });
+  }
+
+  removeFromBookmarkSuccessfully(message) {
+    console.log(message);
+  }
+
+  removeFromBookmarkFailed(message) {
+    console.log(message);
   }
 
   async initialMap() {

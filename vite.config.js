@@ -41,6 +41,47 @@ export default defineConfig({
       injectManifest: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
+      manifest: {
+        id: "/#/",
+        start_url: "/#/",
+        name: "Story App",
+        short_name: "StoryApp",
+        description: "Aplikasi Cerita",
+        theme_color: "#ffffff",
+        icons: [
+          {
+            src: "images/icons/pwa-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "images/icons/pwa-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any",
+          },
+        ],
+        screenshots: [
+          {
+            src: "images/screenshots/storyApp_00_1.png",
+            sizes: "1920x1080",
+            type: "image/png",
+            form_factor: "wide",
+          },
+          {
+            src: "images/screenshots/storyApp_00_2.png",
+            sizes: "1920x1080",
+            type: "image/png",
+            form_factor: "wide",
+          },
+          {
+            src: "images/screenshots/storyApp_00_3.png",
+            sizes: "1920x1080",
+            type: "image/png",
+            form_factor: "wide",
+          },
+        ],
+      },
     }),
   ],
 });

@@ -2,7 +2,7 @@ import { showFormattedDate, showImageAlt } from "./utils";
 
 export function generateMainNavigationListTemplate() {
   return `
-  <li><a id="story-list-button" class="story-list-button" href="#/">Cerita Terkini</a></li>
+  
   <li><a id="bookmark-button" class="bookmark-button" href="#/bookmark">Cerita Tersimpan</a></li>
   `;
 }
@@ -177,6 +177,15 @@ export function generateRemoveStoryButtonTemplate() {
     <button id="story-detail-remove" class="btn btn-transparent">
       Buang Cerita <i class="fas fa-bookmark"></i>
     </button>
+  `;
+}
+
+export function generateStoriesListErrorTemplate(message) {
+  return `
+    <div id="stories-list-error" class="stories-list__error">
+      <h2>Terjadi kesalahan pengambilan cerita tersimpan</h2>
+      <p>${message ? message : "Gunakan jaringan lain atau laporkan error ini."}</p>
+    </div>
   `;
 }
 

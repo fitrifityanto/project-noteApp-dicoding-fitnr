@@ -43,7 +43,7 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
       manifest: {
-        id: "/#/",
+        id: "/project-storyapp-dicoding-fitnr/#/",
         start_url: "/project-storyapp-dicoding-fitnr/#/",
         name: "Story App",
         short_name: "StoryApp",

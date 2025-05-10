@@ -21,7 +21,6 @@ export function getAccessToken() {
 
 export function putAccessToken(token) {
   try {
-    console.log("Token yang akan disimpan:", token);
     localStorage.setItem(ACCESS_TOKEN_KEY, token);
     return true;
   } catch (error) {

@@ -23,6 +23,7 @@ import {
   subscribe,
   unsubscribe,
 } from "../utils/notification-helper";
+import NotFoundPage from "./404/404-page";
 
 class App {
   #content = null;
@@ -134,14 +135,15 @@ class App {
   async renderPage() {
     const url = getActiveRoute();
     const routeFn = routes[url];
+    const page = routeFn ? routeFn() : new NotFoundPage();
 
-    if (!routeFn) {
-      console.error("Route tidak ditemukan untuk:", url);
-      this.#content.innerHTML = "<p>Halaman tidak ditemukan</p>";
-      return;
-    }
-
-    const page = routeFn();
+    // if (!routeFn) {
+    //   // console.error("Route tidak ditemukan untuk:", url);
+    //
+    //   return new NotFoundPage();
+    // }
+    //
+    // const page = routeFn();
 
     if (!document.startViewTransition) {
       this.#content.innerHTML = await page.render();
@@ -197,7 +199,7 @@ class App {
     });
 
     transition.finished.then(() => {
-      console.log("transition finished");
+      // console.log("transition finished");
       this.#currentPath = getActivePathname();
       if (targetThumbnail) {
         targetThumbnail.style.viewTransitionName = "";

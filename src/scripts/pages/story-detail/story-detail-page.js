@@ -47,13 +47,11 @@ export default class StoryDetailPage {
         lon: story.lon,
         placeName: story.placeName,
       });
-    console.log(story.lat, story.lon);
 
     //Map
     await this.#presenter.showStoryDetailMap();
     if (this.#map) {
       const storyCoordinate = [story.lat, story.lon];
-      console.log("storyCoordinate", storyCoordinate);
       const markerOptions = { alt: story.name };
       const popupOptions = { content: story.placeName };
       this.#map.changeCamera(storyCoordinate);

@@ -25,7 +25,6 @@ export default class StoryDetailPresenter {
       }
       // console.log("getStorybyId", response);
       const story = await mapStory(response.story);
-      console.log("story detail result", story);
       this.#view.storyDetailAndInitialMap(response.message, story);
     } catch (error) {
       console.error("showStoryDetail: error:", error);

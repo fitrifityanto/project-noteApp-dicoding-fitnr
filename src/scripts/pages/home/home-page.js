@@ -32,7 +32,6 @@ export default class HomePage {
   }
 
   showStoryList(message, stories) {
-    console.log(stories.length);
     if (stories.length <= 0) {
       console.log("stories empty");
       this.storiesListEmpty();

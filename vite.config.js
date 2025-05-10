@@ -44,7 +44,7 @@ export default defineConfig({
       },
       manifest: {
         id: "/#/",
-        start_url: "/#/",
+        start_url: "/project-storyapp-dicoding-fitnr/#/",
         name: "Story App",
         short_name: "StoryApp",
         description: "Aplikasi Cerita",

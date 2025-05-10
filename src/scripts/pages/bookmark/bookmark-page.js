@@ -15,7 +15,7 @@ export default class BookmarkPage {
       <section class="container">
         <h1 class="section-title">Cerita Tersimpan</h1>
 
-        <div class="stories-list__container">
+        <div class="stories-bookmark-list__container">
           <div id="stories-list"></div>
           <div id="stories-list-loading-container"></div>
         </div>
@@ -42,7 +42,7 @@ export default class BookmarkPage {
     }, "");
 
     document.getElementById("stories-list").innerHTML = `
-    <div class="stories-list">${html}</div>`;
+    <div class="stories-bookmark-list">${html}</div>`;
   }
 
   bookmarkedStoriesListEmpty() {

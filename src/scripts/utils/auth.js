@@ -1,3 +1,4 @@
+import LoginPage from "../pages/auth/login/login-page";
 import { getActiveRoute } from "../routes/url-parser";
 import CONFIG from "../config";
 
@@ -47,7 +48,8 @@ export function checkUnauthenticatedRouteOnly(page) {
 
   if (unauthenticatedRoutesOnly.includes(url) && isLogin) {
     location.hash = "/";
-    return null;
+    return new LoginPage();
+    // return null;
   }
 
   return page;
@@ -58,7 +60,8 @@ export function checkAuthenticatedRoute(page) {
 
   if (!isLogin) {
     location.hash = "/login";
-    return null;
+    return new LoginPage();
+    // return null;
   }
 
   return page;

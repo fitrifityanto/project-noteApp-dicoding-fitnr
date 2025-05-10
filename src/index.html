@@ -3,8 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>App</title>
 
     <script type="module" src="/scripts/index.js"></script>
@@ -32,15 +32,18 @@
         Lompat Ke Konten Utama
       </button>
       <div class="main-header container">
-        <a class="brand-name" href="#/">App</a>
+        <div style="display: flex; align-items: center">
+          <img src="/images/logo.png" alt="Logo" width="64" height="64" />
+          <a class="brand-name" href="#/">Story</a>
+        </div>
 
         <nav id="navigation-drawer" class="navigation-drawer">
-          <ul id="navlist-main" class="navigation-drawer__navlist-main"></ul>
-
           <ul id="nav-list" class="nav-list">
             <li><a href="#/">Beranda</a></li>
             <li><a href="#/about">About</a></li>
           </ul>
+          <ul id="navlist-main" class="navigation-drawer__navlist-main"></ul>
+
           <ul id="navlist" class="navigation-drawer__navlist"></ul>
         </nav>
 

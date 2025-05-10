@@ -18,7 +18,7 @@ export function generateUnauthenticatedNavigationListTemplate() {
 export function generateAuthenticatedNavigationListTemplate() {
   return `
   <li id="push-notification-tools" class="push-notification-tools"></li>
-  <li><a id="new-story-button" class="btn new-story-button" href="#/new">Buat Cerita <i class="fas fa-plus"></i></a></li>
+  <li><a id="new-story-button" class=" new-story-button" href="#/new">Buat Cerita <i class="fas fa-plus"></i></a></li>
   <li><a id="logout-button" class="logout-button" href="#/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
   `;
 }
@@ -65,10 +65,12 @@ export function generateStoryItemTemplate({
         </div>
         <div class="story-item__main">
           <div class="story-item__more-info">
+
             <div class="story-item__createdat">
               <i class="fas fa-calendar-alt"></i>
               ${showFormattedDate(createdAt, "id-ID")}
             </div>
+
           </div>
         </div>
         <a class="btn story-item__read-more" href="#/story/${id}">
@@ -155,12 +157,13 @@ export function generateStoryDetailTemplate({
           </div>
         </div> 
       </div>
-      <div class="report-detail__body__actions__container">
+      
+    </div> 
+    <div class="report-detail__body__actions__container">
         <div class="story-detail__actions__buttons">
             <div id="save-actions-container"></div>
         </div>
-      </div>
-    </div> 
+    </div>
   `;
 }
 
@@ -191,7 +194,7 @@ export function generateStoriesListErrorTemplate(message) {
 
 export function generateSubscribeButtonTemplate() {
   return `
-    <button id="subscribe-button" class="btn subscribe-button">
+    <button id="subscribe-button" class="btn-main subscribe-button">
       Subscribe <i class="fas fa-bell"></i>
     </button>
   `;

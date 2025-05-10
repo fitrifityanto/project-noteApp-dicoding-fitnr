@@ -67,6 +67,7 @@
     padding: 0;
     background-color: transparent;
 
+    flex: 1 1 auto;
     flex-direction: row;
     justify-content: space-between;
 
@@ -75,11 +76,15 @@
     transform: translateX(0);
   }
 
+  .navigation-drawer__navlist-main,
   .nav-list,
   .navigation-drawer__navlist {
     flex-direction: row;
+    align-items: center;
   }
 
+  .navigation-drawer__navlist-main li a,
+  .navigation-drawer__navlist li a,
   .nav-list li a {
     display: inline-block;
   }
